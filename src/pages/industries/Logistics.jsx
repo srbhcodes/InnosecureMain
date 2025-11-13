@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/pages/industry-detail.css';
+import logistics1 from '../../components/industries/images/logistics1.png';
+import logistics2 from '../../components/industries/images/logistics2.jpg';
+import logistics3 from '../../components/industries/images/logistics3.jpg';
 
 const Logistics = () => {
   return (
@@ -24,7 +27,7 @@ const Logistics = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/logistic.png" alt="Autonomous Delivery Systems" />
+            <img src={logistics1} alt="Autonomous Delivery Systems" />
           </div>
         </div>
       </section>
@@ -39,7 +42,7 @@ const Logistics = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/pic10.png" alt="Smart Warehousing Solutions" />
+            <img src={logistics2} alt="Smart Warehousing Solutions" />
           </div>
         </div>
       </section>
@@ -54,7 +57,7 @@ const Logistics = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/growth.png" alt="Supply Chain Analytics" />
+            <img src={logistics3} alt="Supply Chain Analytics" />
           </div>
         </div>
       </section>

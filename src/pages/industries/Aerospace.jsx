@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/pages/industry-detail.css';
+import Aero1 from '../../components/industries/images/Aero1.png';
+import Aero2 from '../../components/industries/images/Aero2.jpg';
+import Aero3 from '../../components/industries/images/Aero3.png';
 
 const Aerospace = () => {
   return (
@@ -24,7 +27,7 @@ const Aerospace = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/aerospace-engineering.png" alt="Advanced Propulsion Systems" />
+            <img src={Aero1} alt="Advanced Propulsion Systems" />
           </div>
         </div>
       </section>
@@ -39,7 +42,7 @@ const Aerospace = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/pic1.png" alt="Next-Generation Aerospace Materials" />
+            <img src={Aero2} alt="Next-Generation Aerospace Materials" />
           </div>
         </div>
       </section>
@@ -54,7 +57,7 @@ const Aerospace = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/pic2.png" alt="Autonomous Flight Systems" />
+            <img src={Aero3} alt="Autonomous Flight Systems" />
           </div>
         </div>
       </section>

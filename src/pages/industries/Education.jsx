@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/pages/industry-detail.css';
+import education1 from '../../components/industries/images/education1.png';
+import education2 from '../../components/industries/images/education2.png';
+import education3 from '../../components/industries/images/education3.png';
 
 const Education = () => {
   return (
@@ -24,7 +27,7 @@ const Education = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/online-learning.png" alt="Digital Learning Platform" />
+            <img src={education1} alt="Digital Learning Platform" />
           </div>
         </div>
       </section>
@@ -39,7 +42,7 @@ const Education = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/pic10.png" alt="Virtual Classroom Solutions" />
+            <img src={education2} alt="Virtual Classroom Solutions" />
           </div>
         </div>
       </section>
@@ -54,7 +57,7 @@ const Education = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/pic10.png" alt="Learning Analytics" />
+            <img src={education3} alt="Learning Analytics" />
           </div>
         </div>
       </section>

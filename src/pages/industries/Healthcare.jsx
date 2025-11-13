@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/pages/industry-detail.css';
+import healthcare1 from '../../components/industries/images/healthcare1.png';
+import healthcare2 from '../../components/industries/images/healthcare2.png';
+import healthcare3 from '../../components/industries/images/healthcare3.png';
 
 const Healthcare = () => {
   return (
@@ -24,7 +27,7 @@ const Healthcare = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/pic5.png" alt="Digital Health Platform" />
+            <img src={healthcare1} alt="Digital Health Platform" />
           </div>
         </div>
       </section>
@@ -39,7 +42,7 @@ const Healthcare = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/pic6.png" alt="Telemedicine Solutions" />
+            <img src={healthcare2} alt="Telemedicine Solutions" />
           </div>
         </div>
       </section>
@@ -54,7 +57,7 @@ const Healthcare = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/pic7.png" alt="Medical Analytics" />
+            <img src={healthcare3} alt="Medical Analytics" />
           </div>
         </div>
       </section>

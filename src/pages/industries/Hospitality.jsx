@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/pages/industry-detail.css';
+import hospitality1 from '../../components/industries/images/hospitality1.png';
+import hospitality2 from '../../components/industries/images/hospitality2.jpg';
+import hospitality3 from '../../components/industries/images/hospitality3.jpg';
 
 const Hospitality = () => {
   return (
@@ -24,7 +27,7 @@ const Hospitality = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/hospitality.png" alt="Smart Hotel Management" />
+            <img src={hospitality1} alt="Smart Hotel Management" />
           </div>
         </div>
       </section>
@@ -39,7 +42,7 @@ const Hospitality = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/pic10.png" alt="Guest Experience Solutions" />
+            <img src={hospitality2} alt="Guest Experience Solutions" />
           </div>
         </div>
       </section>
@@ -54,7 +57,7 @@ const Hospitality = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/trip.png" alt="Digital Booking Platform" />
+            <img src={hospitality3} alt="Digital Booking Platform" />
           </div>
         </div>
       </section>

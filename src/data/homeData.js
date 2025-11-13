@@ -124,18 +124,18 @@ export const certifications = [
 ];
 
 export const industries = [
-  { icon: '✈️', title: 'Aerospace and Defense' },
-  { icon: '🚗', title: 'Automotive' },
-  { icon: '🏦', title: 'Banking' },
-  { icon: '🎓', title: 'Education' },
-  { icon: '❤️', title: 'Healthcare' },
-  { icon: '💻', title: 'High Tech' },
-  { icon: '🏨', title: 'Hospitality' },
-  { icon: '🛡️', title: 'Insurance' },
-  { icon: '🎥', title: 'Media & Entertainment' },
-  { icon: '🛍️', title: 'Retail' },
-  { icon: '✈️', title: 'Tour & Travel' },
-  { icon: '🚚', title: 'Logistic' }
+  { icon: '✈️', title: 'Aerospace and Defense', link: '/industries/aerospace' },
+  { icon: '🚗', title: 'Automotive', link: '/industries/automotive' },
+  { icon: '🏦', title: 'Banking', link: '/industries/banking' },
+  { icon: '🎓', title: 'Education', link: '/industries/education' },
+  { icon: '❤️', title: 'Healthcare', link: '/industries/healthcare' },
+  { icon: '💻', title: 'High Tech', link: '/industries/high-tech' },
+  { icon: '🏨', title: 'Hospitality', link: '/industries/hospitality' },
+  { icon: '🛡️', title: 'Insurance', link: '/industries/insurance' },
+  { icon: '🎥', title: 'Media & Entertainment', link: '/industries/media' },
+  { icon: '🛍️', title: 'Retail', link: '/industries/retail' },
+  { icon: '✈️', title: 'Tour & Travel', link: '/industries/tour-travel' },
+  { icon: '🚚', title: 'Logistic', link: '/industries/logistics' }
 ];
 
 export const itInitiatives = [

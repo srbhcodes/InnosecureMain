@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/pages/industry-detail.css';
+import tech1 from '../../components/industries/images/tech1.png';
+import tech2 from '../../components/industries/images/tech2.png';
+import tech3 from '../../components/industries/images/tech3.jpg';
 
 const HighTech = () => {
   return (
@@ -24,7 +27,7 @@ const HighTech = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/high-tech.png" alt="Quantum Computing Solutions" />
+            <img src={tech1} alt="Quantum Computing Solutions" />
           </div>
         </div>
       </section>
@@ -39,7 +42,7 @@ const HighTech = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/pic8.png" alt="Advanced Robotics" />
+            <img src={tech2} alt="Advanced Robotics" />
           </div>
         </div>
       </section>
@@ -54,7 +57,7 @@ const HighTech = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/pic9.png" alt="Next-Generation AI Systems" />
+            <img src={tech3} alt="Next-Generation AI Systems" />
           </div>
         </div>
       </section>

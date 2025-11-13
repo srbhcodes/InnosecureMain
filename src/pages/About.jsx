@@ -32,13 +32,25 @@ const About = () => {
     'Execution with Excellence'
   ];
 
+  const getCountryImage = (country) => {
+    const imageMap = {
+      'UK': 'uk.jpg',
+      'USA': 'us.jpg',
+      'India': 'india.jpg',
+      'UAE': 'uae.jpg',
+      'Singapore': 'singapore.jpg',
+      'Canada': 'canada.jpg'
+    };
+    return `/img/${imageMap[country] || 'us.jpg'}`;
+  };
+
   const globalPresence = [
-    { country: 'UK', city: 'London', flag: '🇬🇧' },
-    { country: 'USA', city: 'Wyoming', flag: '🇺🇸' },
-    { country: 'India', city: 'Indore', flag: '🇮🇳' },
-    { country: 'UAE', city: 'Dubai', flag: '🇦🇪' },
-    { country: 'Singapore', city: 'Singapore', flag: '🇸🇬' },
-    { country: 'Canada', city: 'Toronto', flag: '🇨🇦' }
+    { country: 'UK', city: 'London' },
+    { country: 'USA', city: 'Wyoming' },
+    { country: 'India', city: 'Indore' },
+    { country: 'UAE', city: 'Dubai' },
+    { country: 'Singapore', city: 'Singapore' },
+    { country: 'Canada', city: 'Toronto' }
   ];
 
   return (
@@ -140,8 +152,13 @@ const About = () => {
           <h2 className="section-title">Our Global Presence</h2>
           <div className="global-presence-grid">
             {globalPresence.map((location, index) => (
-              <div key={index} className="presence-card">
-                <span className="presence-flag">{location.flag}</span>
+              <div 
+                key={index} 
+                className="presence-card"
+                style={{
+                  '--country-image': `url(${getCountryImage(location.country)})`
+                }}
+              >
                 <h3>{location.country}</h3>
                 <p>{location.city}</p>
               </div>

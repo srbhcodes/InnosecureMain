@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/pages/industry-detail.css';
+import retail1 from '../../components/industries/images/retail1.png';
+import retail2 from '../../components/industries/images/retail2.jpg';
+import retail3 from '../../components/industries/images/retail3.jpg';
 
 const Retail = () => {
   return (
@@ -24,7 +27,7 @@ const Retail = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/marketplace.png" alt="Digital Retail Platform" />
+            <img src={retail1} alt="Digital Retail Platform" />
           </div>
         </div>
       </section>
@@ -39,7 +42,7 @@ const Retail = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <div className="industry-section__image-placeholder">📦</div>
+            <img src={retail2} alt="Smart Inventory Management" />
           </div>
         </div>
       </section>
@@ -54,7 +57,7 @@ const Retail = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <div className="industry-section__image-placeholder">🎯</div>
+            <img src={retail3} alt="Personalized Shopping" />
           </div>
         </div>
       </section>

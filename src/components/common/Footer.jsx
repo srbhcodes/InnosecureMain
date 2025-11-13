@@ -59,7 +59,7 @@ const Footer = () => {
             <ul className="footer-contact">
               <li>
                 <span>📞</span>
-                <a href="tel:+17732808828">+1 (773) 280-8828</a>
+                <a href="tel:+17732318084">(773) 231-8084</a>
               </li>
               <li>
                 <span>📧</span>
@@ -70,7 +70,7 @@ const Footer = () => {
               <li>
                 <span>🏢</span>
                 <span>
-                  1021 E Lincolnway Suite #6391<br />
+                  1021 E Lincolnway, Suite #6810<br />
                   Cheyenne, Wyoming 82001
                 </span>
               </li>

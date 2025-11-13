@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/pages/industry-detail.css';
+import banking1 from '../../components/industries/images/banking1.jpg';
+import banking2 from '../../components/industries/images/banking2.png';
+import banking3 from '../../components/industries/images/banking3.jpg';
 
 const Banking = () => {
   return (
@@ -24,7 +27,7 @@ const Banking = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/bank.png" alt="Digital Banking Platform" />
+            <img src={banking1} alt="Digital Banking Platform" />
           </div>
         </div>
       </section>
@@ -39,7 +42,7 @@ const Banking = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/pic3.png" alt="Advanced Security Solutions" />
+            <img src={banking2} alt="Advanced Security Solutions" />
           </div>
         </div>
       </section>
@@ -54,7 +57,7 @@ const Banking = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/pic4.png" alt="Financial Analytics" />
+            <img src={banking3} alt="Financial Analytics" />
           </div>
         </div>
       </section>

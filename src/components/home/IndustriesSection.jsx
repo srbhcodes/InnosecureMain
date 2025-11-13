@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { industries } from '../../data/homeData';
 
 const IndustriesSection = () => {
@@ -12,10 +13,10 @@ const IndustriesSection = () => {
 
         <div className="industries-grid">
           {industries.map((industry, index) => (
-            <div key={index} className="industry-card">
+            <Link key={index} to={industry.link} className="industry-card">
               <span className="industry-icon">{industry.icon}</span>
               <h3>{industry.title}</h3>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

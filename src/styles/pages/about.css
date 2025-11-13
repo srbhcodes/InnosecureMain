@@ -226,6 +226,44 @@
   box-shadow: var(--shadow-elev-1);
   text-align: center;
   transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.presence-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--country-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+  z-index: 0;
+  transform: scale(1.1);
+}
+
+.presence-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
 }
 
 .presence-card:hover {
@@ -233,10 +271,21 @@
   box-shadow: var(--shadow-elev-2);
 }
 
-.presence-flag {
-  font-size: 48px;
-  display: block;
-  margin-bottom: var(--spacing-sm);
+.presence-card:hover::before {
+  opacity: 1;
+  filter: blur(1.5px);
+  transform: scale(1);
+}
+
+.presence-card:hover::after {
+  opacity: 1;
+}
+
+.presence-card h3,
+.presence-card p {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .presence-card h3 {

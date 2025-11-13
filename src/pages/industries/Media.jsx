@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/pages/industry-detail.css';
+import media1 from '../../components/industries/images/media1.png';
+import media2 from '../../components/industries/images/media2.png';
+import media3 from '../../components/industries/images/media3.png';
 
 const Media = () => {
   return (
@@ -24,7 +27,7 @@ const Media = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/media.png" alt="Virtual Production Technology" />
+            <img src={media1} alt="Virtual Production Technology" />
           </div>
         </div>
       </section>
@@ -39,7 +42,7 @@ const Media = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/video.png" alt="AI Content Creation" />
+            <img src={media2} alt="AI Content Creation" />
           </div>
         </div>
       </section>
@@ -54,7 +57,7 @@ const Media = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/pic10.png" alt="Immersive Entertainment" />
+            <img src={media3} alt="Immersive Entertainment" />
           </div>
         </div>
       </section>

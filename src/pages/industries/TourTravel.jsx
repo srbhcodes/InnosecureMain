@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/pages/industry-detail.css';
+import tour1 from '../../components/industries/images/tour1.avif';
+import tour2 from '../../components/industries/images/tour2.webp';
+import tour3 from '../../components/industries/images/tour3.jpg';
 
 const TourTravel = () => {
   return (
@@ -24,7 +27,7 @@ const TourTravel = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <img src="/img/trip.png" alt="Travel Solutions" />
+            <img src={tour1} alt="Travel Solutions" />
           </div>
         </div>
       </section>
@@ -39,7 +42,7 @@ const TourTravel = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <div className="industry-section__image-placeholder">🤖</div>
+            <img src={tour2} alt="AI Travel Planning" />
           </div>
         </div>
       </section>
@@ -54,7 +57,7 @@ const TourTravel = () => {
             </p>
           </div>
           <div className="industry-section__image">
-            <div className="industry-section__image-placeholder">🗺️</div>
+            <img src={tour3} alt="Smart Destination Management" />
           </div>
         </div>
       </section>

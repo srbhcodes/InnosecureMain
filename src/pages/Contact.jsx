@@ -19,18 +19,51 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    alert('Thank you for contacting us! We will get back to you soon.');
+    
+    // Create mailto link with form data
+    const subject = encodeURIComponent(`Contact Form Submission from ${formData.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\n` +
+      `Email: ${formData.email}\n` +
+      `Phone: ${formData.phone || 'Not provided'}\n` +
+      `Company: ${formData.company || 'Not provided'}\n\n` +
+      `Message:\n${formData.message}`
+    );
+    
+    // Open email client
+    window.location.href = `mailto:info@innosecure.com?subject=${subject}&body=${body}`;
+    
+    // Reset form
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      company: '',
+      message: ''
+    });
+    
+    alert('Thank you for contacting us! Your email client should open shortly.');
+  };
+
+  const getCountryImage = (country) => {
+    const imageMap = {
+      'UK': 'uk.jpg',
+      'USA': 'us.jpg',
+      'India': 'india.jpg',
+      'UAE': 'uae.jpg',
+      'Singapore': 'singapore.jpg',
+      'Canada': 'canada.jpg'
+    };
+    return `/img/${imageMap[country] || 'us.jpg'}`;
   };
 
   const locations = [
-    { country: 'USA', city: 'Wyoming', flag: '🇺🇸' },
-    { country: 'UK', city: 'London', flag: '🇬🇧' },
-    { country: 'India', city: 'Indore', flag: '🇮🇳' },
-    { country: 'UAE', city: 'Dubai', flag: '🇦🇪' },
-    { country: 'Singapore', city: 'Singapore', flag: '🇸🇬' },
-    { country: 'Canada', city: 'Toronto', flag: '🇨🇦' }
+    { country: 'USA', city: 'Wyoming' },
+    { country: 'UK', city: 'London' },
+    { country: 'India', city: 'Indore' },
+    { country: 'UAE', city: 'Dubai' },
+    { country: 'Singapore', city: 'Singapore' },
+    { country: 'Canada', city: 'Toronto' }
   ];
 
   return (
@@ -60,7 +93,7 @@ const Contact = () => {
                   <span className="icon">📞</span>
                   <div>
                     <h3>USA Phone</h3>
-                    <a href="tel:+17732808828">+1 (773) 280-8828</a>
+                    <a href="tel:+17732318084">(773) 231-8084</a>
                   </div>
                 </div>
 
@@ -85,7 +118,7 @@ const Contact = () => {
                   <div>
                     <h3>USA Address</h3>
                     <p>
-                      1021 E Lincolnway Suite #6391
+                      1021 E Lincolnway, Suite #6810
                       <br />
                       Cheyenne, Wyoming 82001
                     </p>
@@ -190,8 +223,13 @@ const Contact = () => {
           
           <div className="locations-grid">
             {locations.map((location, index) => (
-              <div key={index} className="location-card">
-                <span className="location-flag">{location.flag}</span>
+              <div 
+                key={index} 
+                className="location-card"
+                style={{
+                  '--country-image': `url(${getCountryImage(location.country)})`
+                }}
+              >
                 <h3>{location.country}</h3>
                 <p>{location.city}</p>
               </div>
