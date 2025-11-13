@@ -186,7 +186,8 @@ export const partners = [
   { image: '/img/databricks.png', alt: 'Databricks' },
   { image: '/img/atlassian.png', alt: 'Atlassian' },
   { image: '/img/aws.png', alt: 'AWS' },
-  { image: '/img/shopify.png', alt: 'Shopify' }
+  { image: '/img/shopify.png', alt: 'Shopify' },
+  { image: '/img/workday.png', alt: 'Workday' }
 ];
 
 export const clients = [

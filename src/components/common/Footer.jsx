@@ -11,7 +11,9 @@ const Footer = () => {
           {/* Company Info */}
           <div className="footer-column">
             <div className="footer-logo">
-              <span>Innosecure</span>
+              <span className="logo-text">
+                innos<span className="logo-e">e</span>cure
+              </span>
             </div>
             <p className="footer-description">
               Revolutionize your business with creative technology solutions. Our all-star teams of experts woks alongside you bringing your vision life and creating possibilities. Together, let's innovate and make a lasting impact join us at innovate united.

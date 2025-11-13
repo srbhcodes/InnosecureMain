@@ -25,10 +25,20 @@
 }
 
 .footer-logo {
-  font-size: 20px;
-  font-weight: 700;
-  color: white;
   margin-bottom: 8px;
+}
+
+.footer-logo .logo-text {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 400;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+.footer-logo .logo-e {
+  color: #87CEEB; /* Sky blue */
 }
 
 .footer-description {

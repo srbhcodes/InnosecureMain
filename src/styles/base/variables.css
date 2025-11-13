@@ -34,9 +34,9 @@
   --spacing-3xl: 96px;
   --spacing-4xl: 128px;
   
-  /* Typography */
-  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-secondary: 'Inter', sans-serif;
+  /* Typography - Plus Jakarta Sans (Modern, Professional) */
+  --font-primary: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-secondary: 'Plus Jakarta Sans', sans-serif;
   
   /* Font Sizes */
   --font-size-xs: 0.75rem;    /* 12px */

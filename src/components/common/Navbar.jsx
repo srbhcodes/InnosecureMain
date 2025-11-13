@@ -48,8 +48,9 @@ const Navbar = () => {
         <div className="navbar-container">
           {/* Logo */}
           <Link to="/" className="navbar-logo">
-            {/* <img src="/logo.png" alt="InnoSecure Logo" /> */}
-            <span>Innosecure</span>
+            <span className="logo-text">
+              innos<span className="logo-e">e</span>cure
+            </span>
           </Link>
 
           {/* Center Navigation - Desktop */}

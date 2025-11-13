@@ -52,14 +52,24 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  font-size: 18px;
-  font-weight: 600;
-  color: #000000;
   gap: 8px;
 }
 
 .navbar-logo:hover {
   opacity: 0.85;
+}
+
+.navbar-logo .logo-text {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 20px;
+  font-weight: 400;
+  color: #000000;
+  letter-spacing: 0.5px;
+}
+
+.navbar-logo .logo-e {
+  color: #87CEEB; /* Sky blue */
 }
 
 .navbar-logo img {

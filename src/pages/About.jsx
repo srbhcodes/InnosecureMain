@@ -56,14 +56,13 @@ const About = () => {
   return (
     <div className="about">
       {/* Hero Section */}
-      <section className="about-hero">
-        <div className="container">
-          <h1 className="about-hero__title">ABOUT</h1>
-          <h2 className="about-hero__subtitle">We Are Your Technology Partner</h2>
+      <div className="page-header">
+        <div className="container about-header-container">
+          <h1 className="page-title">About Us</h1>
+          <p className="page-subtitle">
+            We Are Your Technology Partner
+          </p>
           <div className="about-hero__stats">
-            <div className="hero-stat">
-              <span className="hero-stat__label">2016 – Innovating Since</span>
-            </div>
             <div className="hero-stat">
               <span className="hero-stat__number">250+</span>
               <span className="hero-stat__label">Clients</span>
@@ -75,7 +74,7 @@ const About = () => {
           </div>
           <p className="about-hero__tagline">Milestones and Beyond!</p>
         </div>
-      </section>
+      </div>
 
       {/* Who We Are */}
       <section className="about-section">
