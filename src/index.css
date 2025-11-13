@@ -1,0 +1,18 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Base Styles - Load Order Matters */
+@import './styles/base/reset.css';
+@import './styles/base/variables.css';
+@import './styles/base/globals.css';
+
+/* Component Styles */
+@import './styles/components/navbar.css';
+@import './styles/components/footer.css';
+
+/* Page Styles */
+@import './styles/pages/home.css';
+@import './styles/pages/about.css';
+@import './styles/pages/services.css';
+@import './styles/pages/industries.css';
+@import './styles/pages/contact.css';

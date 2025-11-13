@@ -1,0 +1,119 @@
+/* Services Page Styles */
+
+.services {
+  background: var(--bg-page);
+}
+
+.services-section {
+  padding: var(--spacing-3xl) var(--spacing-md);
+  background: white;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.service-card {
+  background: var(--bg-page);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-base);
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-elev-2);
+  border-color: var(--color-primary);
+}
+
+.service-icon {
+  font-size: 48px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.service-card h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+}
+
+.service-card p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Service Categories */
+.service-categories {
+  padding: var(--spacing-3xl) var(--spacing-md);
+  background: var(--bg-page);
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-2xl);
+}
+
+.category-card {
+  background: white;
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-elev-1);
+  transition: all var(--transition-base);
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.category-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-elev-2);
+}
+
+.service-badge {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  margin: 0 auto var(--spacing-lg);
+}
+
+.category-card h3 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+}
+
+.category-card p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-base);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .services-section,
+  .service-categories {
+    padding: var(--spacing-2xl) var(--spacing-md);
+  }
+
+  .services-grid,
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+}
