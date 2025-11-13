@@ -159,7 +159,7 @@ const Contact = () => {
                     <p>
                       1121, 1st Floor, Indore
                       <br />
-                      Indore 452010
+                      Indore, Madhya Pradesh, 452010
                     </p>
                   </div>
                 </div>
