@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../styles/pages/service-detail.css';
 
 const DataEngineering = () => {
@@ -112,7 +113,7 @@ const DataEngineering = () => {
         <div className="container">
           <h2>Ready to Unlock the Power of Your Data?</h2>
           <p>Let's discuss how data engineering can transform your business intelligence and analytics capabilities.</p>
-          <a href="/contact" className="btn btn-primary">Get Started</a>
+          <Link to="/contact" className="btn btn-primary">Get Started</Link>
         </div>
       </section>
     </div>

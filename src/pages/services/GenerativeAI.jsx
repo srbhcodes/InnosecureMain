@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../styles/pages/service-detail.css';
 
 const GenerativeAI = () => {
@@ -113,7 +114,7 @@ const GenerativeAI = () => {
         <div className="container">
           <h2>Ready to Transform Your Business with AI?</h2>
           <p>Let's discuss how Generative AI can drive innovation and growth for your organization.</p>
-          <a href="/contact" className="btn btn-primary">Get Started</a>
+          <Link to="/contact" className="btn btn-primary">Get Started</Link>
         </div>
       </section>
     </div>

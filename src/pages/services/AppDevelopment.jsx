@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../styles/pages/service-detail.css';
 
 const AppDevelopment = () => {
@@ -112,7 +113,7 @@ const AppDevelopment = () => {
         <div className="container">
           <h2>Ready to Build Your Next Application?</h2>
           <p>Let's discuss how we can develop secure, scalable applications that drive your business forward.</p>
-          <a href="/contact" className="btn btn-primary">Get Started</a>
+          <Link to="/contact" className="btn btn-primary">Get Started</Link>
         </div>
       </section>
     </div>

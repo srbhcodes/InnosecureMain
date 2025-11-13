@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../styles/pages/service-detail.css';
 
 const IntelligentAutomation = () => {
@@ -113,7 +114,7 @@ const IntelligentAutomation = () => {
         <div className="container">
           <h2>Ready to Automate Your Business Processes?</h2>
           <p>Let's discuss how intelligent automation can transform your operations and drive efficiency.</p>
-          <a href="/contact" className="btn btn-primary">Get Started</a>
+          <Link to="/contact" className="btn btn-primary">Get Started</Link>
         </div>
       </section>
     </div>

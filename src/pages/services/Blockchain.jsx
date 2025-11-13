@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../styles/pages/service-detail.css';
 
 const Blockchain = () => {
@@ -112,7 +113,7 @@ const Blockchain = () => {
         <div className="container">
           <h2>Ready to Build on the Blockchain?</h2>
           <p>Let's discuss how blockchain and Web3 can transform your business operations.</p>
-          <a href="/contact" className="btn btn-primary">Get Started</a>
+          <Link to="/contact" className="btn btn-primary">Get Started</Link>
         </div>
       </section>
     </div>

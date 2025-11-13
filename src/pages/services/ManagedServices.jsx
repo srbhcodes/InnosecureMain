@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../styles/pages/service-detail.css';
 
 const ManagedServices = () => {
@@ -112,7 +113,7 @@ const ManagedServices = () => {
         <div className="container">
           <h2>Ready to Outsource Your IT Management?</h2>
           <p>Let's discuss how our managed services can free up your team to focus on strategic initiatives.</p>
-          <a href="/contact" className="btn btn-primary">Get Started</a>
+          <Link to="/contact" className="btn btn-primary">Get Started</Link>
         </div>
       </section>
     </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../styles/pages/service-detail.css';
 
 const CloudEngineering = () => {
@@ -113,7 +114,7 @@ const CloudEngineering = () => {
         <div className="container">
           <h2>Ready to Transform Your Infrastructure with Cloud?</h2>
           <p>Let's discuss how cloud engineering can enhance your business agility and scalability.</p>
-          <a href="/contact" className="btn btn-primary">Get Started</a>
+          <Link to="/contact" className="btn btn-primary">Get Started</Link>
         </div>
       </section>
     </div>
