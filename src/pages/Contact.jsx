@@ -5,10 +5,35 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    countryCode: '+1',
     phone: '',
     company: '',
     message: ''
   });
+
+  // Common country codes
+  const countryCodes = [
+    { code: '+1', country: 'USA/Canada' },
+    { code: '+91', country: 'India' },
+    { code: '+44', country: 'UK' },
+    { code: '+971', country: 'UAE' },
+    { code: '+65', country: 'Singapore' },
+    { code: '+61', country: 'Australia' },
+    { code: '+49', country: 'Germany' },
+    { code: '+33', country: 'France' },
+    { code: '+81', country: 'Japan' },
+    { code: '+86', country: 'China' },
+    { code: '+7', country: 'Russia' },
+    { code: '+55', country: 'Brazil' },
+    { code: '+52', country: 'Mexico' },
+    { code: '+34', country: 'Spain' },
+    { code: '+39', country: 'Italy' },
+    { code: '+82', country: 'South Korea' },
+    { code: '+31', country: 'Netherlands' },
+    { code: '+46', country: 'Sweden' },
+    { code: '+47', country: 'Norway' },
+    { code: '+41', country: 'Switzerland' }
+  ];
 
   const handleChange = (e) => {
     setFormData({
@@ -22,10 +47,11 @@ const Contact = () => {
     
     // Create mailto link with form data
     const subject = encodeURIComponent(`Contact Form Submission from ${formData.name}`);
+    const fullPhone = formData.phone ? `${formData.countryCode} ${formData.phone}` : 'Not provided';
     const body = encodeURIComponent(
       `Name: ${formData.name}\n` +
       `Email: ${formData.email}\n` +
-      `Phone: ${formData.phone || 'Not provided'}\n` +
+      `Phone: ${fullPhone}\n` +
       `Company: ${formData.company || 'Not provided'}\n\n` +
       `Message:\n${formData.message}`
     );
@@ -37,6 +63,7 @@ const Contact = () => {
     setFormData({
       name: '',
       email: '',
+      countryCode: '+1',
       phone: '',
       company: '',
       message: ''
@@ -171,14 +198,29 @@ const Contact = () => {
 
                 <div className="form-group">
                   <label htmlFor="phone">Phone Number</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="+1 (555) 000-0000"
-                  />
+                  <div className="phone-input-wrapper">
+                    <select
+                      name="countryCode"
+                      value={formData.countryCode}
+                      onChange={handleChange}
+                      className="country-code-select"
+                    >
+                      {countryCodes.map((item, index) => (
+                        <option key={index} value={item.code}>
+                          {item.code} ({item.country})
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="(555) 000-0000"
+                      className="phone-input"
+                    />
+                  </div>
                 </div>
 
                 <div className="form-group">
