@@ -1,204 +1,146 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { typingWords, heroStats } from '../../data/homeData';
+import React, { useEffect, useRef, useState } from 'react';
+import { heroStats, typingWords } from '../../data/homeData';
 
 const HeroSection = () => {
-  const [typingWord, setTypingWord] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const dotsContainerRef = useRef(null);
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [dots, setDots] = useState([]);
-  const heroRef = useRef(null);
-  const mousePosRef = useRef({ x: -1000, y: -1000, active: false });
 
-  // Initialize dots
   useEffect(() => {
-    const dotCount = 50;
-    const newDots = Array.from({ length: dotCount }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 3 + 1,
-      speed: Math.random() * 0.5 + 0.3,
-      direction: Math.random() * Math.PI * 2,
-      baseSpeed: Math.random() * 0.5 + 0.3, // Store original speed
-    }));
-    setDots(newDots);
-  }, []);
+    const container = dotsContainerRef.current;
+    if (!container) return;
 
-  // Combined animation loop - handles both continuous movement and mouse interaction
-  useEffect(() => {
-    if (dots.length === 0) return;
+    const numDots = 30; // Number of dots
+    const dots = [];
 
-    let animationFrameId;
-    let lastTime = performance.now();
-    let smoothMousePos = { x: -1000, y: -1000 };
-
-    const animate = (currentTime) => {
-      const deltaTime = currentTime - lastTime;
-      lastTime = currentTime;
+    // Create dots
+    for (let i = 0; i < numDots; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'hero__dot';
       
-      // Normalize to ~60fps (16.67ms per frame)
-      const normalizedDelta = Math.min(deltaTime / 16.67, 2);
-
-      // Smooth mouse position interpolation
-      smoothMousePos.x += (mousePosRef.current.x - smoothMousePos.x) * 0.1;
-      smoothMousePos.y += (mousePosRef.current.y - smoothMousePos.y) * 0.1;
-
-      setDots((prevDots) =>
-        prevDots.map((dot) => {
-          // Get base values
-          const baseSpeed = dot.baseSpeed || 0.3;
-          let currentSpeed = dot.speed || baseSpeed;
-          let currentDirection = dot.direction;
-
-          // Handle mouse interaction (direction and speed changes)
-          const dx = dot.x - smoothMousePos.x;
-          const dy = dot.y - smoothMousePos.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          const influenceRadius = 30; // Slightly larger radius
-          
-          if (distance < influenceRadius && distance > 1 && mousePosRef.current.active) {
-            // Mouse is near - push dots away
-            const force = Math.min((influenceRadius - distance) / influenceRadius, 1);
-            const angle = Math.atan2(dy, dx); // Angle away from mouse
-            
-            // Smooth direction change towards away from mouse
-            const directionDiff = angle - currentDirection;
-            let normalizedDiff = ((directionDiff % (Math.PI * 2)) + Math.PI * 3) % (Math.PI * 2) - Math.PI;
-            
-            // Apply smooth direction change (less aggressive)
-            currentDirection = currentDirection + normalizedDiff * 0.1;
-            
-            // Increase speed when near mouse (push away effect)
-            currentSpeed = Math.min(baseSpeed + force * 0.3, 1.2);
-          } else {
-            // No mouse influence - gradually return to base behavior
-            currentSpeed = currentSpeed * 0.95 + baseSpeed * 0.05;
-            
-            // Add slight random direction drift for natural movement
-            if (Math.random() < 0.02) {
-              currentDirection += (Math.random() - 0.5) * 0.1;
-            }
-          }
-
-          // Ensure minimum speed for continuous movement
-          const effectiveSpeed = Math.max(currentSpeed, baseSpeed * 0.8);
-          const moveDistance = effectiveSpeed * normalizedDelta * 0.6;
-          
-          // Calculate new position
-          let newX = dot.x + Math.cos(currentDirection) * moveDistance;
-          let newY = dot.y + Math.sin(currentDirection) * moveDistance;
-
-          // Wrap around edges
-          if (newX < 0) newX = 100;
-          if (newX > 100) newX = 0;
-          if (newY < 0) newY = 100;
-          if (newY > 100) newY = 0;
-
-          return { 
-            ...dot, 
-            x: newX, 
-            y: newY, 
-            direction: currentDirection, 
-            speed: currentSpeed 
-          };
-        })
-      );
-
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animationFrameId = requestAnimationFrame(animate);
-
-    return () => {
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
-    };
-  }, [dots.length]);
-
-  // Handle mouse movement - only updates ref, doesn't call setDots
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
-        mousePosRef.current.x = ((e.clientX - rect.left) / rect.width) * 100;
-        mousePosRef.current.y = ((e.clientY - rect.top) / rect.height) * 100;
-        mousePosRef.current.active = true;
-      }
-    };
-
-    const handleMouseLeave = () => {
-      mousePosRef.current.active = false;
-      mousePosRef.current.x = -1000;
-      mousePosRef.current.y = -1000;
-    };
-
-    const heroElement = heroRef.current;
-    if (heroElement) {
-      heroElement.addEventListener('mousemove', handleMouseMove);
-      heroElement.addEventListener('mouseleave', handleMouseLeave);
+      // Random initial position
+      const size = Math.random() * 6 + 3; // Size between 3-9px
+      const x = Math.random() * 100; // Percentage
+      const y = Math.random() * 100; // Percentage
+      
+      dot.style.width = `${size}px`;
+      dot.style.height = `${size}px`;
+      dot.style.opacity = Math.random() * 0.5 + 0.3; // Opacity between 0.3-0.8
+      
+      // Random velocity (pixel-based for smoother animation) - Much faster speed
+      const vx = (Math.random() - 0.5) * 3.0; // Speed between -1.5 to 1.5 pixels per frame
+      const vy = (Math.random() - 0.5) * 3.0;
+      
+      dot.dataset.vx = vx;
+      dot.dataset.vy = vy;
+      
+      container.appendChild(dot);
+      dots.push({ element: dot, x, y, vx, vy, size });
     }
 
+    // Get container dimensions for pixel-based positioning
+    const getContainerDimensions = () => {
+      return {
+        width: container.offsetWidth,
+        height: container.offsetHeight
+      };
+    };
+
+    // Convert percentage to pixels for initial positions
+    const dims = getContainerDimensions();
+    dots.forEach((dot) => {
+      dot.x = (dot.x / 100) * dims.width;
+      dot.y = (dot.y / 100) * dims.height;
+    });
+
+    // Animation loop
+    let animationId;
+    const animate = () => {
+      const dims = getContainerDimensions();
+      
+      dots.forEach((dot) => {
+        // Update position
+        dot.x += dot.vx;
+        dot.y += dot.vy;
+
+        // Bounce off edges
+        if (dot.x <= 0 || dot.x >= dims.width) {
+          dot.vx = -dot.vx;
+          dot.x = Math.max(0, Math.min(dims.width, dot.x));
+        }
+        if (dot.y <= 0 || dot.y >= dims.height) {
+          dot.vy = -dot.vy;
+          dot.y = Math.max(0, Math.min(dims.height, dot.y));
+        }
+
+        // Apply position using transform for better performance
+        dot.element.style.transform = `translate(${dot.x}px, ${dot.y}px) translate(-50%, -50%)`;
+
+        // Occasionally add random direction change for more organic movement
+        if (Math.random() < 0.01) {
+          dot.vx += (Math.random() - 0.5) * 0.4;
+          dot.vy += (Math.random() - 0.5) * 0.4;
+          
+          // Limit speed - Much faster max speed
+          dot.vx = Math.max(-3.0, Math.min(3.0, dot.vx));
+          dot.vy = Math.max(-3.0, Math.min(3.0, dot.vy));
+        }
+      });
+
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    // Cleanup
     return () => {
-      if (heroElement) {
-        heroElement.removeEventListener('mousemove', handleMouseMove);
-        heroElement.removeEventListener('mouseleave', handleMouseLeave);
+      if (animationId) {
+        cancelAnimationFrame(animationId);
       }
+      dots.forEach((dot) => {
+        if (dot.element.parentNode) {
+          dot.element.parentNode.removeChild(dot.element);
+        }
+      });
     };
   }, []);
 
+  // Typing animation effect
   useEffect(() => {
-    const currentWord = typingWords[currentIndex];
-    let timeout;
-
-    if (!isDeleting && typingWord === currentWord) {
-      // Word is complete, wait then start deleting
-      timeout = setTimeout(() => {
-        setIsDeleting(true);
-      }, 2000);
-    } else if (isDeleting && typingWord === '') {
-      // Word is deleted, move to next word
-      setIsDeleting(false);
-      setCurrentIndex((prev) => (prev + 1) % typingWords.length);
-    } else if (isDeleting) {
-      // Deleting characters
-      timeout = setTimeout(() => {
-        setTypingWord((prev) => prev.slice(0, -1));
-      }, 50);
-    } else {
-      // Typing characters
-      timeout = setTimeout(() => {
-        setTypingWord((prev) => currentWord.slice(0, prev.length + 1));
-      }, 100);
-    }
+    const currentWord = typingWords[currentWordIndex];
+    const typeSpeed = isDeleting ? 50 : 100; // Faster when deleting, slower when typing
+    
+    const timeout = setTimeout(() => {
+      if (!isDeleting && displayText === currentWord) {
+        // Finished typing, wait then start deleting
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && displayText === '') {
+        // Finished deleting, move to next word
+        setIsDeleting(false);
+        setCurrentWordIndex((prev) => (prev + 1) % typingWords.length);
+      } else if (isDeleting) {
+        // Deleting
+        setDisplayText((prev) => prev.slice(0, -1));
+      } else {
+        // Typing
+        setDisplayText((prev) => currentWord.slice(0, prev.length + 1));
+      }
+    }, typeSpeed);
 
     return () => clearTimeout(timeout);
-  }, [typingWord, currentIndex, isDeleting]);
+  }, [displayText, isDeleting, currentWordIndex]);
 
   return (
-    <section className="hero" ref={heroRef}>
-      {/* Animated dots */}
-      <div className="hero__dots">
-        {dots.map((dot) => (
-          <div
-            key={dot.id}
-            className="hero__dot"
-            style={{
-              left: `${dot.x}%`,
-              top: `${dot.y}%`,
-              width: `${dot.size}px`,
-              height: `${dot.size}px`,
-            }}
-          />
-        ))}
-      </div>
+    <section className="hero">
+      <div className="hero__dots" ref={dotsContainerRef} />
       <div className="hero__grid-overlay hero__grid-overlay--title" />
       <div className="hero__container">
         <h1 className="hero__title">
           Global business consulting <span className="gradient-text italic">for a dynamic world!</span>
         </h1>
         <p className="hero__typing-text">
-          We <span className="typing-word">{typingWord || '\u00a0'}</span> project success
+          We <span className="typing-word">{displayText || '\u00A0'}</span> project success
         </p>
 
         <div className="hero__stats">
