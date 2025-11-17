@@ -63,8 +63,8 @@
   font-family: 'Times New Roman', Times, serif;
   font-style: italic;
   font-size: 20px;
-  font-weight: 400;
-  color: #000000;
+  font-weight: 500;
+  color: #111827;
   letter-spacing: 0.5px;
 }
 
@@ -101,9 +101,9 @@
   align-items: center;
   gap: 6px;
   text-decoration: none;
-  color: #6b7280;
+  color: #1f2937;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   padding: 8px 16px;
   border-radius: 6px;
   transition: all 0.2s ease;
@@ -138,9 +138,9 @@
 /* Dropdown Menu - Akiflow Style */
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 12px);
-  left: 50%;
-  transform: translateX(-50%) translateY(-10px);
+  top: calc(100% + 10px);
+  left: 0;
+  transform: translateY(-10px);
   background: white;
   border-radius: 16px;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
@@ -174,7 +174,7 @@
 .navbar-item:hover .dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 
 .dropdown-title {
@@ -190,7 +190,7 @@
   align-items: center;
   gap: 14px;
   padding: 12px 10px;
-  color: #6b7280;
+  color: #374151;
   text-decoration: none;
   border-radius: 10px;
   font-size: 15px;
@@ -315,18 +315,36 @@
 }
 
 /* Mobile Menu */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 900;
+}
+
+.mobile-menu-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .mobile-menu {
   display: none;
   position: fixed;
-  top: 96px;
-  left: 0;
+  top: 0;
   right: 0;
   bottom: 0;
+  width: min(420px, 90vw);
   background: white;
-  padding: 24px;
+  padding: 120px 28px 32px;
   overflow-y: auto;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
+  transform: translateX(110%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -12px 0 40px rgba(15, 23, 42, 0.18);
+  z-index: 950;
+  border-radius: 24px 0 0 24px;
 }
 
 .mobile-menu.active {
@@ -351,17 +369,24 @@
 
 .mobile-menu .dropdown-menu {
   position: static;
-  opacity: 1;
+  opacity: 0;
   visibility: visible;
   transform: none;
   box-shadow: none;
   margin: 0;
-  padding-left: 16px;
-  display: none;
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+  border: none;
 }
 
 .mobile-menu .navbar-item.active .dropdown-menu {
-  display: block;
+  opacity: 1;
+  max-height: 800px;
+  margin-top: 8px;
+  padding-top: 4px;
+  padding-bottom: 12px;
 }
 
 .mobile-menu .navbar-actions {
@@ -399,6 +424,13 @@
   }
 }
 
+@media (max-width: 600px) {
+  .mobile-menu {
+    width: 100%;
+    border-radius: 0;
+  }
+}
+
 @media (max-width: 480px) {
   .navbar {
     padding: 10px 12px;
@@ -418,7 +450,7 @@
   }
 
   .mobile-menu {
-    top: 76px;
+    padding-top: 88px;
   }
 }
 

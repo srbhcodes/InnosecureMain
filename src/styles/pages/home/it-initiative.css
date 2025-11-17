@@ -1,0 +1,81 @@
+/* IT Initiative Section - Modern Card Design */
+.it-initiative-section {
+  padding: var(--spacing-4xl) var(--spacing-md);
+  background: var(--bg-page);
+  position: relative;
+}
+
+.initiative-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-2xl);
+}
+
+.initiative-card {
+  background: white;
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--color-border);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.initiative-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--color-primary), var(--color-accent-start));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s ease;
+}
+
+.initiative-card:hover::after {
+  transform: scaleY(1);
+}
+
+.initiative-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(124, 58, 237, 0.15);
+  border-color: var(--color-primary);
+  background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%);
+}
+
+.initiative-icon {
+  font-size: 48px;
+  margin-bottom: var(--spacing-lg);
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(96, 165, 250, 0.1));
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+}
+
+.initiative-card:hover .initiative-icon {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(96, 165, 250, 0.2));
+}
+
+.initiative-card h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.initiative-card p {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-muted);
+}
+
+

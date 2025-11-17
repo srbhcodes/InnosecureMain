@@ -22,14 +22,44 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when route changes
-  useEffect(() => {
+  const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     setActiveMobileDropdown(null);
+  };
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    closeMobileMenu();
   }, [location]);
 
+  // Lock body scroll when mobile menu is open & close on Escape
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closeMobileMenu();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
+
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setIsMobileMenuOpen((prev) => {
+      if (prev) {
+        setActiveMobileDropdown(null);
+      }
+      return !prev;
+    });
   };
 
   const toggleMobileDropdown = (dropdownName) => {
@@ -184,7 +214,9 @@ const Navbar = () => {
           <button
             className="mobile-menu-btn"
             onClick={toggleMobileMenu}
-            aria-label="Toggle mobile menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu-panel"
+            aria-label={isMobileMenuOpen ? 'Close mobile menu' : 'Open mobile menu'}
           >
             <span
               style={{
@@ -205,8 +237,20 @@ const Navbar = () => {
         </div>
       </nav>
 
+      <div
+        className={`mobile-menu-overlay ${isMobileMenuOpen ? 'visible' : ''}`}
+        onClick={closeMobileMenu}
+        aria-hidden="true"
+      />
+
       {/* Mobile Menu */}
-      <div className={`mobile-menu ${isMobileMenuOpen ? 'active' : ''}`}>
+      <div
+        id="mobile-menu-panel"
+        className={`mobile-menu ${isMobileMenuOpen ? 'active' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="navbar"
+      >
         <ul className="navbar-menu">
           {/* Services Dropdown - Mobile */}
           <li

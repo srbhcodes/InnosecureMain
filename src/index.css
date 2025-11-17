@@ -11,7 +11,7 @@
 @import './styles/components/footer.css';
 
 /* Page Styles */
-@import './styles/pages/home.css';
+@import './styles/pages/home/index.css';
 @import './styles/pages/about.css';
 @import './styles/pages/services.css';
 @import './styles/pages/industries.css';

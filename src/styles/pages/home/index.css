@@ -1,0 +1,24 @@
+/* Homepage Styles - Main Entry Point */
+/* This file imports all section-specific styles */
+
+/* Import all section styles - @import must come before any CSS rules */
+@import './hero.css';
+@import './trusted-by.css';
+@import './service-benefits.css';
+@import './services-preview.css';
+@import './stats.css';
+@import './industries.css';
+@import './it-initiative.css';
+@import './partners.css';
+@import './clients.css';
+@import './conversion-stats.css';
+@import './testimonials.css';
+@import './insights.css';
+@import './contact-cta.css';
+@import './responsive.css';
+
+/* Home page base styles */
+.home {
+  background: var(--bg-page);
+}
+

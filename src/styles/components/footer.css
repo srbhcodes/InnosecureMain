@@ -2,7 +2,12 @@
   background: #1f2937;
   color: #e5e7eb;
   padding: 60px 24px 24px;
-  margin-top: 80px;
+  margin-top: 0;
+}
+
+/* Remove footer margin on industry pages */
+.main-content:has(.industry-detail) ~ .footer {
+  margin-top: 0;
 }
 
 .footer-container {
