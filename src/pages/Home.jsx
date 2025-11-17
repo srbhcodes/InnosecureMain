@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/pages/home.css';
 
 // Import all section components
 import {

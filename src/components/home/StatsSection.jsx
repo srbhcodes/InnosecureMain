@@ -5,13 +5,18 @@ const StatsSection = () => {
   const [counters, setCounters] = useState(statsSectionData.map(() => 0));
   const [hasAnimated, setHasAnimated] = useState(false);
   const sectionRef = useRef(null);
+  const timersRef = useRef([]);
 
   useEffect(() => {
-    const timers = [];
-
     const animateCounters = () => {
+      // Clear any existing timers
+      timersRef.current.forEach((timer) => clearInterval(timer));
+      timersRef.current = [];
+
       statsSectionData.forEach((stat, index) => {
-        const target = parseInt(stat.number);
+        const target = parseInt(stat.number.replace(/[^0-9]/g, ''), 10);
+        if (isNaN(target)) return;
+
         const duration = 2000; // 2 seconds
         const steps = 60;
         const increment = target / steps;
@@ -23,6 +28,8 @@ const StatsSection = () => {
           if (current >= target) {
             current = target;
             clearInterval(timer);
+            // Remove from timers array
+            timersRef.current = timersRef.current.filter((t) => t !== timer);
           }
           setCounters((prev) => {
             const newCounters = [...prev];
@@ -31,7 +38,7 @@ const StatsSection = () => {
           });
         }, stepDuration);
         
-        timers.push(timer);
+        timersRef.current.push(timer);
       });
     };
 
@@ -51,6 +58,32 @@ const StatsSection = () => {
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
+      
+      // Check if section is already visible (fallback for fast scroll or initial load)
+      const checkVisibility = () => {
+        if (sectionRef.current && !hasAnimated) {
+          const rect = sectionRef.current.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          if (isVisible) {
+            setHasAnimated(true);
+            animateCounters();
+          }
+        }
+      };
+      
+      // Check immediately and also after a short delay
+      checkVisibility();
+      const visibilityTimeout = setTimeout(checkVisibility, 300);
+      
+      return () => {
+        clearTimeout(visibilityTimeout);
+        if (sectionRef.current) {
+          observer.unobserve(sectionRef.current);
+        }
+        // Cleanup timers
+        timersRef.current.forEach((timer) => clearInterval(timer));
+        timersRef.current = [];
+      };
     }
 
     return () => {
@@ -58,7 +91,8 @@ const StatsSection = () => {
         observer.unobserve(sectionRef.current);
       }
       // Cleanup timers
-      timers.forEach((timer) => clearInterval(timer));
+      timersRef.current.forEach((timer) => clearInterval(timer));
+      timersRef.current = [];
     };
   }, [hasAnimated]);
 
