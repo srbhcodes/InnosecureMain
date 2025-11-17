@@ -8,10 +8,12 @@
   padding: var(--spacing-3xl) var(--spacing-lg);
   position: relative;
   background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 50%, #ede9fe 100%);
-  overflow-x: hidden;
-  overflow-y: visible;
+  overflow: hidden;
   margin-top: -100px; /* Extend background behind navbar */
   padding-top: calc(var(--spacing-3xl) + 100px); /* Compensate for negative margin */
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
 }
 
 /* Extend background to top */
@@ -163,13 +165,14 @@
 }
 
 .hero__container {
-  max-width: 1400px;
+  max-width: min(1400px, 100%);
   margin: 0 auto;
   position: relative;
   z-index: 3;
   padding: 0 var(--spacing-lg);
   width: 100%;
   box-sizing: border-box;
+  overflow: visible;
 }
 
 .hero__title {

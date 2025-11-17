@@ -233,10 +233,6 @@
   .insights-carousel {
     gap: var(--spacing-md);
   }
-
-  .contact-cta__content {
-    padding: var(--spacing-2xl) var(--spacing-lg);
-  }
 }
 
 @media (max-width: 640px) {
