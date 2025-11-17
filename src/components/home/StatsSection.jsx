@@ -9,6 +9,9 @@ const StatsSection = () => {
 
   useEffect(() => {
     const animateCounters = () => {
+      // Don't animate if already animating or completed
+      if (hasAnimated) return;
+      
       // Clear any existing timers
       timersRef.current.forEach((timer) => clearInterval(timer));
       timersRef.current = [];
@@ -40,43 +43,96 @@ const StatsSection = () => {
         
         timersRef.current.push(timer);
       });
+      
+      setHasAnimated(true);
     };
 
+    // Improved visibility check that works for both scroll directions
+    const checkVisibility = () => {
+      if (!sectionRef.current) return false;
+      
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      
+      // Check if section is in viewport - works for both scroll directions
+      // Section is visible if any part of it is in the viewport
+      const isVisible = rect.top < windowHeight && rect.bottom > 0;
+      
+      // More specific: section should be at least partially in viewport
+      // and not completely above or below
+      const isInViewport = rect.top < windowHeight * 0.9 && rect.bottom > windowHeight * 0.1;
+      
+      if (isInViewport && !hasAnimated) {
+        animateCounters();
+        return true;
+      }
+      return false;
+    };
+
+    // IntersectionObserver with better configuration for both directions
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasAnimated) {
-            setHasAnimated(true);
-            animateCounters();
+            // Small delay to ensure smooth animation start
+            setTimeout(() => {
+              if (!hasAnimated) {
+                animateCounters();
+              }
+            }, 50);
           }
         });
       },
       {
-        threshold: 0.3, // Trigger when 30% of the section is visible
+        threshold: [0, 0.1, 0.2], // Multiple thresholds for better detection
+        rootMargin: '50px 0px 50px 0px', // Trigger earlier for both directions
       }
     );
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
       
-      // Check if section is already visible (fallback for fast scroll or initial load)
-      const checkVisibility = () => {
-        if (sectionRef.current && !hasAnimated) {
-          const rect = sectionRef.current.getBoundingClientRect();
-          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-          if (isVisible) {
-            setHasAnimated(true);
-            animateCounters();
-          }
+      // Initial check - important for when page loads with section visible
+      const initialCheck = () => {
+        if (!hasAnimated) {
+          checkVisibility();
         }
       };
       
-      // Check immediately and also after a short delay
-      checkVisibility();
-      const visibilityTimeout = setTimeout(checkVisibility, 300);
+      initialCheck();
+      
+      // Multiple delayed checks to catch different scroll scenarios
+      const timeout1 = setTimeout(initialCheck, 100);
+      const timeout2 = setTimeout(initialCheck, 300);
+      const timeout3 = setTimeout(initialCheck, 600);
+      const timeout4 = setTimeout(initialCheck, 1000);
+      
+      // Scroll event listener - works for both directions
+      let scrollTimeout;
+      const throttledScroll = () => {
+        if (scrollTimeout) return;
+        scrollTimeout = setTimeout(() => {
+          if (!hasAnimated) {
+            checkVisibility();
+          }
+          scrollTimeout = null;
+        }, 150);
+      };
+      
+      // Use both scroll and touchmove for better mobile support
+      window.addEventListener('scroll', throttledScroll, { passive: true });
+      window.addEventListener('touchmove', throttledScroll, { passive: true });
+      window.addEventListener('wheel', throttledScroll, { passive: true });
       
       return () => {
-        clearTimeout(visibilityTimeout);
+        clearTimeout(timeout1);
+        clearTimeout(timeout2);
+        clearTimeout(timeout3);
+        clearTimeout(timeout4);
+        clearTimeout(scrollTimeout);
+        window.removeEventListener('scroll', throttledScroll);
+        window.removeEventListener('touchmove', throttledScroll);
+        window.removeEventListener('wheel', throttledScroll);
         if (sectionRef.current) {
           observer.unobserve(sectionRef.current);
         }
