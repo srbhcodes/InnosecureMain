@@ -30,6 +30,14 @@ const Navbar = () => {
   // Close mobile menu when route changes
   useEffect(() => {
     closeMobileMenu();
+    
+    // Scroll to top when navigating to home page
+    if (location.pathname === '/') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
   }, [location]);
 
   // Lock body scroll when mobile menu is open & close on Escape
@@ -72,12 +80,35 @@ const Navbar = () => {
     return location.pathname === path;
   };
 
+  const handleLogoClick = (e) => {
+    // If already on home page, prevent navigation and scroll to top
+    if (location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      // Close mobile menu if open
+      if (isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+        setActiveMobileDropdown(null);
+      }
+    }
+    // If on different page, Link will handle navigation
+    // The useEffect will handle scrolling to top after navigation
+    // Close mobile menu if open
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+      setActiveMobileDropdown(null);
+    }
+  };
+
   return (
     <>
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`} id="navbar">
         <div className="navbar-container">
           {/* Logo */}
-          <Link to="/" className="navbar-logo">
+          <Link to="/" className="navbar-logo" onClick={handleLogoClick}>
             <span className="logo-text">
               innos<span className="logo-e">e</span>cure
             </span>

@@ -169,11 +169,11 @@
   }
 
   .benefits-list {
-    order: 2;
+    order: 1;
   }
 
   .benefits-content {
-    order: 1;
+    order: 2;
   }
 
   .benefit-services-grid {
