@@ -1,8 +1,22 @@
 {
   "name": "innosecuremain",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Global business consulting and technology solutions company",
+  "author": "INNOSECURE TECHNOLOGIES PRIVATE LIMITED",
+  "homepage": "https://www.innosecuretechnologies.com/",
+  "keywords": [
+    "indore",
+    "innosecure",
+    "vsecure",
+    "tech company",
+    "it services",
+    "business consulting",
+    "technology solutions",
+    "digital transformation"
+  ],
+  "license": "UNLICENSED",
   "engines": {
     "node": ">=20.19.0 || >=22.12.0",
     "npm": ">=10.0.0"

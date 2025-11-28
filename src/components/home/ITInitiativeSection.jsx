@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { itInitiatives } from '../../data/homeData';
 
-const ITInitiativeSection = () => {
+const ITInitiativeSection = memo(() => {
   return (
     <section className="it-initiative-section">
       <div className="container">
@@ -11,8 +11,8 @@ const ITInitiativeSection = () => {
         </p>
 
         <div className="initiative-grid">
-          {itInitiatives.map((initiative, index) => (
-            <div key={index} className="initiative-card">
+          {itInitiatives.map((initiative) => (
+            <div key={initiative.title} className="initiative-card">
               <div className="initiative-icon">{initiative.icon}</div>
               <h3>{initiative.title}</h3>
               <p>{initiative.description}</p>
@@ -22,7 +22,9 @@ const ITInitiativeSection = () => {
       </div>
     </section>
   );
-};
+});
+
+ITInitiativeSection.displayName = 'ITInitiativeSection';
 
 export default ITInitiativeSection;
 

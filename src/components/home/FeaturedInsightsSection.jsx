@@ -1,27 +1,27 @@
-import React, { useRef } from 'react';
+import React, { useRef, memo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { insights } from '../../data/insightsData';
 
-const FeaturedInsightsSection = () => {
+const FeaturedInsightsSection = memo(() => {
   const scrollContainerRef = useRef(null);
 
-  const scrollLeft = () => {
+  const scrollLeft = useCallback(() => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({
         left: -400,
         behavior: 'smooth'
       });
     }
-  };
+  }, []);
 
-  const scrollRight = () => {
+  const scrollRight = useCallback(() => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({
         left: 400,
         behavior: 'smooth'
       });
     }
-  };
+  }, []);
 
   return (
     <section className="insights-section">
@@ -63,7 +63,9 @@ const FeaturedInsightsSection = () => {
       </div>
     </section>
   );
-};
+});
+
+FeaturedInsightsSection.displayName = 'FeaturedInsightsSection';
 
 export default FeaturedInsightsSection;
 

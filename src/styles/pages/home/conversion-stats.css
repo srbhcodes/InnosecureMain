@@ -1,7 +1,7 @@
 /* Conversion Stats Section */
 .conversion-stats {
   padding: var(--spacing-2xl) var(--spacing-md);
-  background: white;
+  background: var(--bg-surface);
 }
 
 .conversion-grid {
@@ -14,7 +14,7 @@
 .conversion-card {
   text-align: center;
   padding: var(--spacing-3xl);
-  background: white;
+  background: var(--bg-card);
   border-radius: var(--radius-xl);
   border: 1px solid rgba(124, 58, 237, 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -49,7 +49,7 @@
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 12px 40px rgba(124, 58, 237, 0.12);
   border-color: rgba(124, 58, 237, 0.2);
-  background: white;
+  background: var(--bg-card);
 }
 
 .conversion-icon {

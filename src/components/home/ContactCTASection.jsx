@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 
-const ContactCTASection = () => {
+const ContactCTASection = memo(() => {
   return (
     <section className="contact-cta">
       <div className="container">
@@ -15,7 +15,9 @@ const ContactCTASection = () => {
       </div>
     </section>
   );
-};
+});
+
+ContactCTASection.displayName = 'ContactCTASection';
 
 export default ContactCTASection;
 

@@ -6,6 +6,8 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMobileDropdown, setActiveMobileDropdown] = useState(null);
+  const [activeDesktopDropdown, setActiveDesktopDropdown] = useState(null);
+  const [forceCloseDropdown, setForceCloseDropdown] = useState(false);
   const location = useLocation();
 
   // Handle scroll effect
@@ -27,9 +29,11 @@ const Navbar = () => {
     setActiveMobileDropdown(null);
   };
 
-  // Close mobile menu when route changes
+  // Close mobile menu and desktop dropdowns when route changes
   useEffect(() => {
     closeMobileMenu();
+    setActiveDesktopDropdown(null); // Close desktop dropdowns on navigation
+    setForceCloseDropdown(false); // Reset force close flag
     
     // Scroll to top when navigating to home page
     if (location.pathname === '/') {
@@ -80,6 +84,29 @@ const Navbar = () => {
     return location.pathname === path;
   };
 
+  // Handle desktop dropdown hover
+  const handleDesktopDropdownEnter = (dropdownName) => {
+    if (!forceCloseDropdown) {
+      setActiveDesktopDropdown(dropdownName);
+    }
+  };
+
+  const handleDesktopDropdownLeave = () => {
+    setActiveDesktopDropdown(null);
+    setForceCloseDropdown(false);
+  };
+
+  // Close desktop dropdown when clicking on a dropdown item
+  const handleDropdownItemClick = (e) => {
+    // Force close immediately - this takes precedence over hover
+    setForceCloseDropdown(true);
+    setActiveDesktopDropdown(null);
+    // Small delay to ensure state updates before navigation
+    setTimeout(() => {
+      setForceCloseDropdown(false);
+    }, 100);
+  };
+
   const handleLogoClick = (e) => {
     // If already on home page, prevent navigation and scroll to top
     if (location.pathname === '/') {
@@ -118,7 +145,11 @@ const Navbar = () => {
           <div className="navbar-center">
             <ul className="navbar-menu">
               {/* Services Dropdown */}
-              <li className="navbar-item">
+              <li 
+                className={`navbar-item ${!forceCloseDropdown && activeDesktopDropdown === 'services' ? 'dropdown-open' : ''}`}
+                onMouseEnter={() => handleDesktopDropdownEnter('services')}
+                onMouseLeave={handleDesktopDropdownLeave}
+              >
                 <Link to="/services" className="navbar-link">
                   Services
                   <svg className="arrow" viewBox="0 0 12 12" fill="currentColor">
@@ -127,31 +158,31 @@ const Navbar = () => {
                 </Link>
                 <div className="dropdown-menu">
                   <div className="dropdown-title">Our Services</div>
-                  <Link to="/services/generative-ai" className="dropdown-item">
+                  <Link to="/services/generative-ai" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-purple">🤖</span>
                     <span>Generative AI</span>
                   </Link>
-                  <Link to="/services/blockchain" className="dropdown-item">
+                  <Link to="/services/blockchain" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-blue">🔗</span>
                     <span>Blockchain & Web3</span>
                   </Link>
-                  <Link to="/services/data-engineering" className="dropdown-item">
+                  <Link to="/services/data-engineering" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-teal">📊</span>
                     <span>Data Engineering</span>
                   </Link>
-                  <Link to="/services/cloud-engineering" className="dropdown-item">
+                  <Link to="/services/cloud-engineering" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-orange">☁️</span>
                     <span>Cloud Engineering</span>
                   </Link>
-                  <Link to="/services/app-development" className="dropdown-item">
+                  <Link to="/services/app-development" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-pink">📱</span>
                     <span>App Development</span>
                   </Link>
-                  <Link to="/services/managed-services" className="dropdown-item">
+                  <Link to="/services/managed-services" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-purple">🔧</span>
                     <span>Managed Services</span>
                   </Link>
-                  <Link to="/services/intelligent-automation" className="dropdown-item">
+                  <Link to="/services/intelligent-automation" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-blue">⚙️</span>
                     <span>Intelligent Automation</span>
                   </Link>
@@ -159,7 +190,11 @@ const Navbar = () => {
               </li>
 
               {/* Industries Dropdown */}
-              <li className="navbar-item">
+              <li 
+                className={`navbar-item ${!forceCloseDropdown && activeDesktopDropdown === 'industries' ? 'dropdown-open' : ''}`}
+                onMouseEnter={() => handleDesktopDropdownEnter('industries')}
+                onMouseLeave={handleDesktopDropdownLeave}
+              >
                 <Link to="/industries" className="navbar-link">
                   Industries
                   <svg className="arrow" viewBox="0 0 12 12" fill="currentColor">
@@ -168,51 +203,51 @@ const Navbar = () => {
                 </Link>
                 <div className="dropdown-menu">
                   <div className="dropdown-title">Industry Solutions</div>
-                  <Link to="/industries/aerospace" className="dropdown-item">
+                  <Link to="/industries/aerospace" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-purple">✈️</span>
                     <span>Aerospace</span>
                   </Link>
-                  <Link to="/industries/automotive" className="dropdown-item">
+                  <Link to="/industries/automotive" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-blue">🚗</span>
                     <span>Automotive</span>
                   </Link>
-                  <Link to="/industries/banking" className="dropdown-item">
+                  <Link to="/industries/banking" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-teal">🏦</span>
                     <span>Banking</span>
                   </Link>
-                  <Link to="/industries/education" className="dropdown-item">
+                  <Link to="/industries/education" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-orange">🎓</span>
                     <span>Education</span>
                   </Link>
-                  <Link to="/industries/healthcare" className="dropdown-item">
+                  <Link to="/industries/healthcare" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-pink">❤️</span>
                     <span>Healthcare</span>
                   </Link>
-                  <Link to="/industries/high-tech" className="dropdown-item">
+                  <Link to="/industries/high-tech" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-purple">💻</span>
                     <span>High Tech</span>
                   </Link>
-                  <Link to="/industries/hospitality" className="dropdown-item">
+                  <Link to="/industries/hospitality" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-blue">🏨</span>
                     <span>Hospitality</span>
                   </Link>
-                  <Link to="/industries/insurance" className="dropdown-item">
+                  <Link to="/industries/insurance" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-teal">🛡️</span>
                     <span>Insurance</span>
                   </Link>
-                  <Link to="/industries/media" className="dropdown-item">
+                  <Link to="/industries/media" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-orange">🎥</span>
                     <span>Media</span>
                   </Link>
-                  <Link to="/industries/retail" className="dropdown-item">
+                  <Link to="/industries/retail" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-pink">🛍️</span>
                     <span>Retail</span>
                   </Link>
-                  <Link to="/industries/tour-travel" className="dropdown-item">
+                  <Link to="/industries/tour-travel" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-purple">✈️</span>
                     <span>Travel</span>
                   </Link>
-                  <Link to="/industries/logistics" className="dropdown-item">
+                  <Link to="/industries/logistics" className="dropdown-item" onClick={handleDropdownItemClick}>
                     <span className="dropdown-badge badge-blue">🚚</span>
                     <span>Logistics</span>
                   </Link>

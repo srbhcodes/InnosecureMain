@@ -22,3 +22,8 @@
   background: var(--bg-page);
 }
 
+/* Dark Theme */
+.dark-theme .home {
+  background: var(--bg-page);
+}
+

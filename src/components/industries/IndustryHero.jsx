@@ -19,3 +19,6 @@ const IndustryHero = ({ title, subtitle }) => {
 export default IndustryHero;
 
 
+
+
+

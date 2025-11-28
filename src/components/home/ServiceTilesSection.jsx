@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { serviceTiles } from '../../data/homeData';
 
-const ServiceTilesSection = () => {
+const ServiceTilesSection = memo(() => {
   return (
     <section className="services-preview">
       <div className="container">
@@ -12,8 +12,8 @@ const ServiceTilesSection = () => {
         </p>
 
         <div className="service-tiles-grid">
-          {serviceTiles.map((service, index) => (
-            <Link to={service.link} key={index} className="service-tile">
+          {serviceTiles.map((service) => (
+            <Link to={service.link} key={service.link} className="service-tile">
               <div className="service-tile__icon">{service.icon}</div>
               <h3 className="service-tile__title">{service.title}</h3>
               <p className="service-tile__description">{service.description}</p>
@@ -23,7 +23,9 @@ const ServiceTilesSection = () => {
       </div>
     </section>
   );
-};
+});
+
+ServiceTilesSection.displayName = 'ServiceTilesSection';
 
 export default ServiceTilesSection;
 

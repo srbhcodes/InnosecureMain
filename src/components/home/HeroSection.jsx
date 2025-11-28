@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, memo, useCallback } from 'react';
 import { heroStats, typingWords } from '../../data/homeData';
 
-const HeroSection = () => {
+const HeroSection = memo(() => {
   const dotsContainerRef = useRef(null);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
@@ -144,8 +144,8 @@ const HeroSection = () => {
         </p>
 
         <div className="hero__stats">
-          {heroStats.map((stat, index) => (
-            <div key={index} className="stat">
+          {heroStats.map((stat) => (
+            <div key={stat.label} className="stat">
               <span className="stat__number">{stat.number}</span>
               <span className="stat__label">{stat.label}</span>
             </div>
@@ -154,6 +154,8 @@ const HeroSection = () => {
       </div>
     </section>
   );
-};
+});
+
+HeroSection.displayName = 'HeroSection';
 
 export default HeroSection;

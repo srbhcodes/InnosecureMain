@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { industries } from '../../data/homeData';
 
-const IndustriesSection = () => {
+const IndustriesSection = memo(() => {
   return (
     <section className="industries-section">
       <div className="container">
@@ -12,8 +12,8 @@ const IndustriesSection = () => {
         </p>
 
         <div className="industries-grid">
-          {industries.map((industry, index) => (
-            <Link key={index} to={industry.link} className="industry-card">
+          {industries.map((industry) => (
+            <Link key={industry.link} to={industry.link} className="industry-card">
               <span className="industry-icon">{industry.icon}</span>
               <h3>{industry.title}</h3>
             </Link>
@@ -22,7 +22,9 @@ const IndustriesSection = () => {
       </div>
     </section>
   );
-};
+});
+
+IndustriesSection.displayName = 'IndustriesSection';
 
 export default IndustriesSection;
 

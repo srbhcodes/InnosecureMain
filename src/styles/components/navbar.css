@@ -131,7 +131,8 @@
   transition: transform 0.2s ease;
 }
 
-.navbar-item:hover .arrow {
+.navbar-item:hover .arrow,
+.navbar-item.dropdown-open .arrow {
   transform: rotate(180deg);
 }
 
@@ -171,10 +172,18 @@
   background: #555;
 }
 
-.navbar-item:hover .dropdown-menu {
+/* Only show dropdown when explicitly opened via JavaScript state */
+.navbar-item.dropdown-open .dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+/* Hide dropdown when forced closed */
+.navbar-item.dropdown-closed .dropdown-menu {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-10px) !important;
 }
 
 .dropdown-title {

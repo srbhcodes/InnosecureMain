@@ -80,4 +80,27 @@
   opacity: 1;
 }
 
+/* Dark Theme Styles */
+.dark-theme .partners-section {
+  background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #111827 100%);
+}
+
+.dark-theme .partners-section .section-title {
+  color: var(--color-text);
+}
+
+.dark-theme .partner-logo {
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+}
+
+.dark-theme .partner-logo:hover {
+  background: rgba(31, 41, 55, 0.95);
+  border-color: rgba(124, 58, 237, 0.5);
+  box-shadow: 0 12px 40px rgba(124, 58, 237, 0.2);
+}
+
+
+
+
 

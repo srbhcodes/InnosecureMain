@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo, useMemo, useCallback } from 'react';
 import { statsSectionData } from '../../data/homeData';
 
-const StatsSection = () => {
+const StatsSection = memo(() => {
   const [counters, setCounters] = useState(statsSectionData.map(() => 0));
   const [hasAnimated, setHasAnimated] = useState(false);
   const sectionRef = useRef(null);
@@ -152,18 +152,18 @@ const StatsSection = () => {
     };
   }, [hasAnimated]);
 
-  const renderDigitalNumber = (number) => {
+  const renderDigitalNumber = useCallback((number) => {
     const numberStr = number.toString();
     return (
       <div className="digital-display">
         {numberStr.split('').map((digit, idx) => (
-          <span key={idx} className="digital-digit">
+          <span key={`${number}-${idx}`} className="digital-digit">
             {digit}
           </span>
         ))}
       </div>
     );
-  };
+  }, []);
 
   return (
     <section className="stats-section" ref={sectionRef}>
@@ -171,7 +171,7 @@ const StatsSection = () => {
         <h2 className="stats-section__title">IT'S OUR PEOPLE WHO MAKES THE DIFFERENCE</h2>
         <div className="stats-grid">
           {statsSectionData.map((stat, index) => (
-            <div key={index} className="stat-card">
+            <div key={stat.label} className="stat-card">
               <div className="stat-card__number-wrapper">
                 {renderDigitalNumber(counters[index])}
               </div>
@@ -182,7 +182,9 @@ const StatsSection = () => {
       </div>
     </section>
   );
-};
+});
+
+StatsSection.displayName = 'StatsSection';
 
 export default StatsSection;
 

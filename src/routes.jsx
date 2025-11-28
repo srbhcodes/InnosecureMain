@@ -1,42 +1,55 @@
 import { createBrowserRouter } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import MainLayout from './layouts/MainLayout';
+import LoadingSpinner from './components/common/LoadingSpinner';
+
+// Home page - load immediately (above the fold)
 import Home from './pages/Home';
-import About from './pages/About';
-import Services from './pages/Services';
-import Industries from './pages/Industries';
-import Contact from './pages/Contact';
-import NotFound from './pages/NotFound';
 
-// Service category pages
-import Digital from './pages/services/Digital';
-import Consulting from './pages/services/Consulting';
-import Technology from './pages/services/Technology';
+// Lazy load all other pages for code splitting
+const About = lazy(() => import('./pages/About'));
+const Services = lazy(() => import('./pages/Services'));
+const Industries = lazy(() => import('./pages/Industries'));
+const Contact = lazy(() => import('./pages/Contact'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
-// Individual service pages
-import GenerativeAI from './pages/services/GenerativeAI';
-import Blockchain from './pages/services/Blockchain';
-import DataEngineering from './pages/services/DataEngineering';
-import CloudEngineering from './pages/services/CloudEngineering';
-import AppDevelopment from './pages/services/AppDevelopment';
-import ManagedServices from './pages/services/ManagedServices';
-import IntelligentAutomation from './pages/services/IntelligentAutomation';
+// Service category pages - lazy loaded
+const Digital = lazy(() => import('./pages/services/Digital'));
+const Consulting = lazy(() => import('./pages/services/Consulting'));
+const Technology = lazy(() => import('./pages/services/Technology'));
 
-// Individual industry pages
-import Aerospace from './pages/industries/Aerospace';
-import Automotive from './pages/industries/Automotive';
-import Banking from './pages/industries/Banking';
-import Education from './pages/industries/Education';
-import Healthcare from './pages/industries/Healthcare';
-import HighTech from './pages/industries/HighTech';
-import Hospitality from './pages/industries/Hospitality';
-import Insurance from './pages/industries/Insurance';
-import Logistics from './pages/industries/Logistics';
-import Media from './pages/industries/Media';
-import Retail from './pages/industries/Retail';
-import TourTravel from './pages/industries/TourTravel';
+// Individual service pages - lazy loaded
+const GenerativeAI = lazy(() => import('./pages/services/GenerativeAI'));
+const Blockchain = lazy(() => import('./pages/services/Blockchain'));
+const DataEngineering = lazy(() => import('./pages/services/DataEngineering'));
+const CloudEngineering = lazy(() => import('./pages/services/CloudEngineering'));
+const AppDevelopment = lazy(() => import('./pages/services/AppDevelopment'));
+const ManagedServices = lazy(() => import('./pages/services/ManagedServices'));
+const IntelligentAutomation = lazy(() => import('./pages/services/IntelligentAutomation'));
 
-// Insight pages
-import InsightDetail from './pages/insights/InsightDetail';
+// Individual industry pages - lazy loaded
+const Aerospace = lazy(() => import('./pages/industries/Aerospace'));
+const Automotive = lazy(() => import('./pages/industries/Automotive'));
+const Banking = lazy(() => import('./pages/industries/Banking'));
+const Education = lazy(() => import('./pages/industries/Education'));
+const Healthcare = lazy(() => import('./pages/industries/Healthcare'));
+const HighTech = lazy(() => import('./pages/industries/HighTech'));
+const Hospitality = lazy(() => import('./pages/industries/Hospitality'));
+const Insurance = lazy(() => import('./pages/industries/Insurance'));
+const Logistics = lazy(() => import('./pages/industries/Logistics'));
+const Media = lazy(() => import('./pages/industries/Media'));
+const Retail = lazy(() => import('./pages/industries/Retail'));
+const TourTravel = lazy(() => import('./pages/industries/TourTravel'));
+
+// Insight pages - lazy loaded
+const InsightDetail = lazy(() => import('./pages/insights/InsightDetail'));
+
+// Wrapper component for Suspense
+const LazyWrapper = ({ children }) => (
+  <Suspense fallback={<LoadingSpinner />}>
+    {children}
+  </Suspense>
+);
 
 export const router = createBrowserRouter([
   {
@@ -49,118 +62,118 @@ export const router = createBrowserRouter([
       },
       {
         path: 'about',
-        element: <About />,
+        element: <LazyWrapper><About /></LazyWrapper>,
       },
       {
         path: 'services',
-        element: <Services />,
+        element: <LazyWrapper><Services /></LazyWrapper>,
       },
       // Service category pages
       {
         path: 'services/digital',
-        element: <Digital />,
+        element: <LazyWrapper><Digital /></LazyWrapper>,
       },
       {
         path: 'services/consulting',
-        element: <Consulting />,
+        element: <LazyWrapper><Consulting /></LazyWrapper>,
       },
       {
         path: 'services/technology',
-        element: <Technology />,
+        element: <LazyWrapper><Technology /></LazyWrapper>,
       },
       // Individual service pages
       {
         path: 'services/generative-ai',
-        element: <GenerativeAI />,
+        element: <LazyWrapper><GenerativeAI /></LazyWrapper>,
       },
       {
         path: 'services/blockchain',
-        element: <Blockchain />,
+        element: <LazyWrapper><Blockchain /></LazyWrapper>,
       },
       {
         path: 'services/data-engineering',
-        element: <DataEngineering />,
+        element: <LazyWrapper><DataEngineering /></LazyWrapper>,
       },
       {
         path: 'services/cloud-engineering',
-        element: <CloudEngineering />,
+        element: <LazyWrapper><CloudEngineering /></LazyWrapper>,
       },
       {
         path: 'services/app-development',
-        element: <AppDevelopment />,
+        element: <LazyWrapper><AppDevelopment /></LazyWrapper>,
       },
       {
         path: 'services/managed-services',
-        element: <ManagedServices />,
+        element: <LazyWrapper><ManagedServices /></LazyWrapper>,
       },
       {
         path: 'services/intelligent-automation',
-        element: <IntelligentAutomation />,
+        element: <LazyWrapper><IntelligentAutomation /></LazyWrapper>,
       },
       {
         path: 'industries',
-        element: <Industries />,
+        element: <LazyWrapper><Industries /></LazyWrapper>,
       },
       // Individual industry pages
       {
         path: 'industries/aerospace',
-        element: <Aerospace />,
+        element: <LazyWrapper><Aerospace /></LazyWrapper>,
       },
       {
         path: 'industries/automotive',
-        element: <Automotive />,
+        element: <LazyWrapper><Automotive /></LazyWrapper>,
       },
       {
         path: 'industries/banking',
-        element: <Banking />,
+        element: <LazyWrapper><Banking /></LazyWrapper>,
       },
       {
         path: 'industries/education',
-        element: <Education />,
+        element: <LazyWrapper><Education /></LazyWrapper>,
       },
       {
         path: 'industries/healthcare',
-        element: <Healthcare />,
+        element: <LazyWrapper><Healthcare /></LazyWrapper>,
       },
       {
         path: 'industries/high-tech',
-        element: <HighTech />,
+        element: <LazyWrapper><HighTech /></LazyWrapper>,
       },
       {
         path: 'industries/hospitality',
-        element: <Hospitality />,
+        element: <LazyWrapper><Hospitality /></LazyWrapper>,
       },
       {
         path: 'industries/insurance',
-        element: <Insurance />,
+        element: <LazyWrapper><Insurance /></LazyWrapper>,
       },
       {
         path: 'industries/logistics',
-        element: <Logistics />,
+        element: <LazyWrapper><Logistics /></LazyWrapper>,
       },
       {
         path: 'industries/media',
-        element: <Media />,
+        element: <LazyWrapper><Media /></LazyWrapper>,
       },
       {
         path: 'industries/retail',
-        element: <Retail />,
+        element: <LazyWrapper><Retail /></LazyWrapper>,
       },
       {
         path: 'industries/tour-travel',
-        element: <TourTravel />,
+        element: <LazyWrapper><TourTravel /></LazyWrapper>,
       },
       {
         path: 'contact',
-        element: <Contact />,
+        element: <LazyWrapper><Contact /></LazyWrapper>,
       },
       {
         path: 'insights/:id',
-        element: <InsightDetail />,
+        element: <LazyWrapper><InsightDetail /></LazyWrapper>,
       },
       {
         path: '*',
-        element: <NotFound />,
+        element: <LazyWrapper><NotFound /></LazyWrapper>,
       },
     ],
   },

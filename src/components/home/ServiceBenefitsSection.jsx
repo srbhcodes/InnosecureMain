@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, memo, useMemo, useCallback } from 'react';
 import { serviceBenefits } from '../../data/homeData';
 
-const ServiceBenefitsSection = () => {
+const ServiceBenefitsSection = memo(() => {
   const [selectedService, setSelectedService] = useState(0);
+
+  const handleServiceSelect = useCallback((index) => {
+    setSelectedService(index);
+  }, []);
+
+  const selectedServiceData = useMemo(() => {
+    return serviceBenefits[selectedService];
+  }, [selectedService]);
 
   return (
     <section className="service-benefits">
@@ -17,9 +25,9 @@ const ServiceBenefitsSection = () => {
           <div className="benefits-list">
             {serviceBenefits.map((service, index) => (
               <button
-                key={index}
+                key={service.title}
                 className={`benefit-item ${selectedService === index ? 'active' : ''}`}
-                onClick={() => setSelectedService(index)}
+                onClick={() => handleServiceSelect(index)}
               >
                 {service.title}
               </button>
@@ -30,11 +38,11 @@ const ServiceBenefitsSection = () => {
           <div className="benefits-content">
             <div className="benefit-content-card">
               <p className="benefit-content-description">
-                {serviceBenefits[selectedService].description}
+                {selectedServiceData.description}
               </p>
               <div className="benefit-services-grid">
-                {serviceBenefits[selectedService].services.map((service, index) => (
-                  <div key={index} className="benefit-service-item">
+                {selectedServiceData.services.map((service, index) => (
+                  <div key={`${selectedServiceData.title}-${service}-${index}`} className="benefit-service-item">
                     {service}
                   </div>
                 ))}
@@ -45,7 +53,9 @@ const ServiceBenefitsSection = () => {
       </div>
     </section>
   );
-};
+});
+
+ServiceBenefitsSection.displayName = 'ServiceBenefitsSection';
 
 export default ServiceBenefitsSection;
 

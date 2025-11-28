@@ -323,7 +323,7 @@ export const industryData = {
       {
         title: 'Electric Vehicle Technology',
         description: 'Pioneering the future of electric mobility with cutting-edge battery technology, charging infrastructure, and power management systems. Our solutions are driving the transition to sustainable transportation with innovative EV platforms and energy-efficient powertrains.',
-        image: '/img/pic10.png',
+        image: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=1200&h=800&fit=crop&auto=format',
         imageAlt: 'Electric Vehicle Solutions',
         reverse: false,
         alt: false
@@ -331,20 +331,18 @@ export const industryData = {
       {
         title: 'Connected Vehicle Systems',
         description: 'Developing advanced connected vehicle technologies that enable seamless communication between vehicles, infrastructure, and cloud systems. Our solutions enhance safety, optimize traffic flow, and deliver personalized in-vehicle experiences through cutting-edge telematics and IoT integration.',
-        image: null, // Placeholder
+        image: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&h=800&fit=crop&auto=format',
         imageAlt: 'Connected Vehicle Systems',
         reverse: true,
-        alt: true,
-        placeholder: '📡'
+        alt: true
       },
       {
         title: 'Autonomous Driving',
         description: 'Leading the development of autonomous driving systems with advanced AI, sensor fusion, and real-time decision-making capabilities. Our solutions are setting new standards for vehicle safety and automation, enabling the next generation of self-driving vehicles.',
-        image: null, // Placeholder
+        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=800&fit=crop&auto=format',
         imageAlt: 'Autonomous Driving',
         reverse: false,
-        alt: false,
-        placeholder: '🚗'
+        alt: false
       }
     ],
     cta: {
